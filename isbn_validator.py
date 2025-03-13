@@ -1,6 +1,3 @@
-test = "978-3-8668-0192-9"
-
-
 def validate_isbn(isbn):
     if not valid_isbn_format(isbn):
         return False
@@ -20,21 +17,27 @@ def validate_isbn(isbn):
         counter += 1
     if 10 - prove_number % 10 == int(isbn_number[-1]):
         return True
+    elif prove_number % 10 == 0 and int(isbn_number[-1]) == 0:
+        return True
     else:
         return False
 
 
 def valid_isbn_format(isbn):
-    dash_indexes = [3, 5, 8, 15]
     if len(isbn) != 17:
+        print("wrong format, try with dashes")
         return False
     try:
+        dash_count = 0
         for index, i in enumerate(isbn):
-
-            if index in dash_indexes and i != "-":
+            if i == "-" : 
+                dash_count +=1
+            elif type(int(i)) != int:
+                print(f"no int on index: {index}")
                 return False
-            if (index not in dash_indexes) and (type(int(i)) != int):
-                return False
+        if dash_count != 4:
+            print("more than 4 dashes") 
+            return False
     except:
         return False
     return True
@@ -45,5 +48,12 @@ if __name__ == "__main__":
         isbn = input("isbn: ")
         if isbn == "":
             break
-        if not valid_isbn_format(isbn):
+        elif valid_isbn_format(isbn):
+            if validate_isbn(isbn):
+                print("valid")
+            else: 
+                print("invalid")
+            continue
+        else:
+            print("wrong formatt")
             continue
