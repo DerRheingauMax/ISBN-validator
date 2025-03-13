@@ -54,5 +54,5 @@ if __name__ == "__main__":
                 print(f'invalid: {error}')
             continue
         else:
-            print(f'wrong format: {valid_isbn_format(isbn)[0]}')
+            print(f'wrong format: {valid_isbn_format(isbn)[1]}')
             continue
