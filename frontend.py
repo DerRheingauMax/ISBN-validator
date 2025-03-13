@@ -12,7 +12,7 @@ def fun():
         return 
     result_label.config(text="", foreground="green", background="grey") 
     root.configure(background="grey")
-    fehler_label.config(text="", foreground="red")
+    fehler_label.config(text="", foreground="red",background="white")
 
 def run():
     global block
@@ -50,11 +50,13 @@ start_lable.pack(side="left")
 search_entry.pack(side="left")
 strat_button.pack(side="right")
 
-result_label = ttk.Label(root, text="", font=("Arial", 14))
-result_label.pack(pady=20)
 
 fehler_label = ttk.Label(root, text="", font=("Arial", 14))
 fehler_label.pack(pady=20)
+
+result_label = ttk.Label(root, text="", font=("Arial", 14))
+result_label.place(relx=0.5, rely=0.5, anchor="center")
+
 
 root.bind('<Return>',lambda event: run())
 
