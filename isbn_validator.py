@@ -1,6 +1,7 @@
 def validate_isbn(isbn):
-    if not valid_isbn_format(isbn):
-        return False
+    valid_format, error = valid_isbn_format(isbn)
+    if not valid_format:
+        return False, error
     isbn_number = ""
     prove_number = 0
     for i in isbn:
@@ -16,31 +17,28 @@ def validate_isbn(isbn):
             prove_number += int(i)
         counter += 1
     if 10 - prove_number % 10 == int(isbn_number[-1]):
-        return True
+        return True, ""
     elif prove_number % 10 == 0 and int(isbn_number[-1]) == 0:
-        return True
+        return True, ""
     else:
-        return False
+        return False, ""
 
 
 def valid_isbn_format(isbn):
     if len(isbn) != 17:
-        print("wrong format, try with dashes")
-        return False
+        return False, "wrong format, try with dashes"
     try:
         dash_count = 0
         for index, i in enumerate(isbn):
             if i == "-" : 
                 dash_count +=1
             elif type(int(i)) != int:
-                print(f"no int on index: {index}")
-                return False
+                return False, f"no int on index: {index}"
         if dash_count != 4:
-            print("more than 4 dashes") 
-            return False
+            return False, "more than 4 dashes"
     except:
-        return False
-    return True
+        return False, "unknown"
+    return True, ""
 
 
 if __name__ == "__main__":
@@ -48,12 +46,13 @@ if __name__ == "__main__":
         isbn = input("isbn: ")
         if isbn == "":
             break
-        elif valid_isbn_format(isbn):
-            if validate_isbn(isbn):
+        elif valid_isbn_format(isbn)[0]:
+            valid, error = validate_isbn(isbn)
+            if valid:
                 print("valid")
             else: 
-                print("invalid")
+                print(f'invalid: {error}')
             continue
         else:
-            print("wrong formatt")
+            print(f'wrong format: {valid_isbn_format(isbn)[0]}')
             continue
