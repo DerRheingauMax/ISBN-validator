@@ -26,16 +26,16 @@ def validate_isbn(isbn):
 
 def valid_isbn_format(isbn):
     if len(isbn) != 17:
-        return False, "wrong format, try with dashes"
+        return False, "falsches Format"
     try:
         dash_count = 0
         for index, i in enumerate(isbn):
             if i == "-" : 
                 dash_count +=1
             elif type(int(i)) != int:
-                return False, f"no int on index: {index}"
+                return False, f"keine Zahl an Stelle: {index+1}"
         if dash_count != 4:
-            return False, "more than 4 dashes"
+            return False, "mehr als 4 Striche"
     except:
         return False, "unknown"
     return True, ""
