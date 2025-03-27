@@ -2,8 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 
 import isbn_validator as isbn_validator
-neutral_color = "grey"
-fail_color = "red"
+neutral_color = "#2fa367"
+fail_color = "#6b2b23"
 succses_color = "green"
 
 def change_backgroundcolor(color):
